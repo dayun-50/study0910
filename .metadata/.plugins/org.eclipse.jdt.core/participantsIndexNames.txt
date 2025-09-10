@@ -5,3 +5,5 @@ C:\20250609_KDT\sts3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspse
 \Day02_Basic_Web\src\main\java
 C:\20250609_KDT\sts3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2681072071.index
 \Day02_Basic\src\main\java
+C:\20250609_KDT\sts3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1100888576.index
+\Day02_Basic_Web\src\main\java
