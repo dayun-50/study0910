@@ -7,4 +7,8 @@ public interface Tv {
 	public void volumeUp();
 	public void volumeDown();
 	
+	
+	
+	
+	
 }

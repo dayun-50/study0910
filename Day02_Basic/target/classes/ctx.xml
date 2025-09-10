@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- bean = new역할 / class내부에 이름입력후 ctrl+스페이스 -->
+	
+	<!-- new SamsungTv("Samsung",1000000) 랑 같은의미 -->
+	<bean class="com.kedu.beans.SamsungTv">
+		<!-- 명시적뭐시기 암튼 인자값을 넣어둘수있는데 자식태그인 밑에보이는
+		constructor-arg 를 사용 -->
+		<constructor-arg ref="speaker"/>
+		<constructor-arg value="Samsung"/>
+		<constructor-arg value="1000000"/>
+	</bean> 
+	
+	<!-- new LGTv -->
+	<!-- <bean class="com.kedu.beans.LGTv">
+	
+	</bean> -->
+
+	<!-- Setter 주입 방식 -->
+	<!-- scope="prototype" 을 추가하면 싱글턴을 없애고 내가 생성하는만큼 계속 생성할수있는데
+	대부분은 싱글턴으로써야하는게 맞음 ㅇㅇ -->
+	<!-- lazy-init = "default" : 뭐 요구하는 순간 getBean하는순간 생성된다? 라시는데 -->
+	<!-- <bean class="com.kedu.beans.SamsungTv">
+		<property name="brand" value="samsung"></property>
+		<property name="price" value="1000000"></property>
+	</bean> -->
+	
+	<bean id="speaker" class="com.kedu.beans.SonySpeaker">
+		
+	</bean>
+	
+	
+</beans>

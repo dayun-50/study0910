@@ -1,5 +1,7 @@
 INDEX VERSION 1.131
 C:\20250609_KDT\sts3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1809138731.index
 \Day01\src\main\java
+C:\20250609_KDT\sts3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1429349590.index
+\Day02_Basic_Web\src\main\java
 C:\20250609_KDT\sts3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2681072071.index
 \Day02_Basic\src\main\java
