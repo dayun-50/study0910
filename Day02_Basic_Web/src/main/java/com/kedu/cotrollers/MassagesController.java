@@ -1,6 +1,6 @@
 package com.kedu.cotrollers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +43,7 @@ public class MassagesController {
 	
 	@RequestMapping("/output")
 	public String toOutput(Model m) throws Exception {
-		ArrayList<MessagesDTO> list = dao.selectAll();
+		List<MessagesDTO> list = dao.selectAll();
 		m.addAttribute("list", list); // == request.setAttribute;
 		
 		return "massages/output";

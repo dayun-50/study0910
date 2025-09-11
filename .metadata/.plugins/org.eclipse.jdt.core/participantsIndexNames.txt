@@ -5,8 +5,12 @@ C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\18091387
 \Day01\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3023513742.index
 \Day03_contacts\src\main\java
+C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2762609699.index
+\Day04_Board\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1100888576.index
 \Day02_Basic_Web\src\main\java
+C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1714414295.index
+\Day04_Board\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3811487693.index
 \Day03_contacts\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1429349590.index

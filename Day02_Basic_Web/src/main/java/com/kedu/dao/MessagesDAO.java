@@ -1,75 +1,63 @@
 package com.kedu.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kedu.dto.MessagesDTO;
 
 @Repository
 public class MessagesDAO {
+//	@Autowired
+//	private BasicDataSource bds;
 	
 	@Autowired
-	private BasicDataSource bds;
+	private JdbcTemplate jdbc;
 	
 	//입력
-	public int insert(MessagesDTO dto) throws Exception {
+	public int insert(MessagesDTO dto) {
 		String sql = "insert into messages values(messages_seq.nextval,?,?)";
-		try(Connection con = bds.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql)){
-			pstat.setString(1, dto.getSender());
-			pstat.setString(2, dto.getMessage());
-			
-			return pstat.executeUpdate();
-		}
+		return jdbc.update(sql, dto.getSender(), dto.getMessage());
 	}
 	
 	//출력
-	public ArrayList<MessagesDTO> selectAll() throws Exception {
+	public List<MessagesDTO> selectAll() {
 		String sql = "select * from messages";
-		try(Connection con = bds.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);
-				ResultSet rs = pstat.executeQuery()){
-			
-			ArrayList<MessagesDTO> list = new ArrayList<>();
-			while(rs.next()) {
-				int seq = rs.getInt("seq");
-				String sender = rs.getString("sender");
-				String message = rs.getString("message");
-				
-				list.add(new MessagesDTO(seq, sender, message));
-			}
-			return list;
-		}
+		return jdbc.query(sql, new BeanPropertyRowMapper<>(MessagesDTO.class));
+		//테이블과 dto 컬럼명이 무조건 다!!! 같을때만 가능한 한줄.
+		
+		
+		//테이블과 dto 컬럼명이 다르다면 이런 귀찮은 일을 해야한다~
+//		return jdbc.query(sql, new RowMapper<MessagesDTO>() { //익명 클레스방식
+//			@Override
+//			public MessagesDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+//				MessagesDTO dto = new MessagesDTO();
+//				dto.setSeq(rs.getInt("seq"));
+//				dto.setSender(rs.getString("sender"));
+//				dto.setMessage(rs.getString("message"));
+//				return dto;
+//			}
+//		});
+	}
+	
+	//리스트말고 그냥 객체 하나만 뽑기
+	public int count() {
+		String sql = "select count(*) from messages";
+		return jdbc.queryForObject(sql, Integer.class); //인트형값이라서 integer
 	}
 	
 	//삭제
-	public int delete(String seq) throws Exception {
-		String sql = "delete from messages where seq = ?";
-		try(Connection con = bds.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, seq);
-			
-			return pstat.executeUpdate();
-		}
+	public int delete(String delSeq) {
+		String sql = "delete from messages where = ?";
+		return jdbc.update(sql, delSeq);
 	}
 	
 	//업데이트
-	public int update(MessagesDTO dto) throws Exception {
+	public int update(MessagesDTO dto) {
 		String sql = "update messages set sender = ?, message = ? where seq = ?";
-		try(Connection con = bds.getConnection();
-				PreparedStatement pstat = con.prepareStatement(sql);){
-			pstat.setString(1, dto.getSender());
-			pstat.setString(2, dto.getMessage());
-			pstat.setInt(3, dto.getSeq());
-			
-			return pstat.executeUpdate();
-		}
+		return jdbc.update(sql, dto.getSender(), dto.getMessage(), dto.getSeq());
 	}
-	
 }
