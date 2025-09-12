@@ -131,9 +131,11 @@
     <div class="login-container">
     	<h4><a href="/indexpage.MembersController">혜빈이와 아이들</a></h4>
         <h1>Login</h1>
+        <form action="/members/login" method="post">
         <input type="text" placeholder="ID" id="id" name="id">
         <input type="password" placeholder="PW" id="pw" name="pw">
         <button id="btn">로그인</button>
+        </form>
         <div class="links">
             <a href="/">아이디 찾기</a> /
             <a href="/">비밀번호 찾기</a> /
@@ -151,7 +153,7 @@
             document.body.appendChild(s);
         }
         
-  
+  		
     </script>
 </body>
 </html>

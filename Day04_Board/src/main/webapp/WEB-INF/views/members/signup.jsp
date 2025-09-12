@@ -66,7 +66,7 @@
     <form action="/members/signpu" method="post">
       <label for="id">ID</label><br>
       <input type="text" id="id" name="userId" placeholder="아이디를 입력하세요">
-      <button type="button" class="small-btn">중복확인</button><br>
+      <button type="button" id="idcheck" class="small-btn">중복확인</button><br>
 
       <label for="pw">PW</label><br>
       <input type="password" id="pw" name="userPw" placeholder="비밀번호를 입력하세요"><br>
@@ -220,6 +220,21 @@
             return false;
         }
     }); 
+   
+   $("#idcheck").on("click",()=>{ //id중복체크
+	   $.ajax({
+		   type: "POST",
+		   url:"/members/idcheck",
+		   data:{id : $("#id").val()}
+	   }).done((resp)=>{
+		   if(resp > 0){
+			   alert("중복된 ID");
+		   }else{
+			   alert("사용 가능 ID");
+		   }
+		   
+	   })
+   });
 </script>
 </body>
 </html>
