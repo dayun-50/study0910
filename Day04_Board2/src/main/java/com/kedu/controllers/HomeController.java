@@ -38,4 +38,6 @@ public class HomeController {
         }
         return result; // 스프링이 자동으로 JSON 변환
     }
+    
+    
 }

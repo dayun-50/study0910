@@ -1,10 +1,13 @@
 package com.kedu.dao;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
 import com.kedu.dto.BoardDTO;
+import com.kedu.dto.FilesDTO;
 
 @Repository
 public class BoardDAO {
@@ -58,6 +61,12 @@ public class BoardDAO {
         String sql = "UPDATE board SET title=?, content=? WHERE seq=? AND writer=?";
         return jdbc.update(sql, board.getTitle(), board.getContent(), board.getSeq(), writer); 
         // 본인 글만 수정 가능
+    }
+    
+    //파일 업로드
+    public int insertFile(FilesDTO dto) {
+    	String sql = "insert into files values(files_seq.nextvla,?,?,?,?)";
+    	return jdbc.update(sql, dto.getWriter(), dto.getOriname(), dto.getSysname(),dto.getSeq());
     }
     
     

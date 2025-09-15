@@ -7,6 +7,8 @@ C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\36750756
 \Day04_Board2\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2681072071.index
 \Day02_Basic\src\main\java
+C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1109882393.index
+\Day05_File\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3811487693.index
 \Day03_contacts\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1540547862.index
