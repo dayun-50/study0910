@@ -7,7 +7,6 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
-		
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="kedu"/>
@@ -15,11 +14,24 @@
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="initialSize" value="5"/>
 	</bean>	
-	
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:/mappers/*-mapper.xml"/>
+		<!-- 요건필수항목이래 -->
+		<!-- src/main/resources 폴더 ㅇㅇ -->
+	</bean>
+
+	<bean id="SqlSessionTemplate" class = "org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession"/>
 	</bean>
 	
+<!-- 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean> -->
+<!-- 	<bean class="com.google.gson.Gson"/> -->
+	
+	<context:component-scan base-package="com.kedu.services"></context:component-scan>
 	<context:component-scan base-package="com.kedu.dao" />
 	
 </beans>

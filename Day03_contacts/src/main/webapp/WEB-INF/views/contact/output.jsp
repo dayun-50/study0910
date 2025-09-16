@@ -20,7 +20,7 @@
 			<tr>
 				<td>${i.seq} </td>
 				<td>${i.name}</td>
-				<td>${i.phone}</td>
+				<td>${i.contact}</td>
 			</tr>
 		</c:forEach>
 		<tr>

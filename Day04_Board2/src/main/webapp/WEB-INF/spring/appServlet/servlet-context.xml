@@ -13,6 +13,7 @@
 
 	<!-- 정적 리소스 -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/img/**" location="/resources/img/" />
 
 	<!-- View Resolver -->
 	<beans:bean

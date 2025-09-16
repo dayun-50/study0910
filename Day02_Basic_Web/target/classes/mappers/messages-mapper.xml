@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Messages">
+	<insert id="insert">
+		insert into messages values(messages_seq.nextval, #{sender}, #{message})
+		<selectKey order="AFTER" keyProperty="seq" resultType="int">
+			select messages_seq.currval from dual
+		</selectKey>
+		
+		<!-- <selectKey order="BEFORE" keyProperty="seq" resultType="int">
+			select messages_seq.nextval from dual
+		</selectKey>
+		insert into messages values(#{seq}, #{sender}, #{message}) -->
+	</insert>
+
+	<delete id="delete">
+		delete from messages where seq = #{seq}
+	</delete>
+
+	<update id="update">
+		update messages set sender = #{sender}, message = #{message} where seq = #{seq}
+	</update>
+
+	<select id="selectAll" resultType="com.kedu.dto.MessagesDTO">
+		select * from messages
+	</select>
+
+	<select id="selectBy" resultType="com.kedu.dto.MessagesDTO">
+		select * from messages where ${column} like '%'||#{keyword}||'%'
+	</select>
+
+	<select id="searchByMultiple" resultType="com.kedu.dto.MessagesDTO">
+		<!-- select * from messages where sender like '%'||#{sender}||'%' or message 
+			like '%'||#{message}||'%' -->
+		select * from messages
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="sender != ''">
+				sender like '%'||#{sender}||'%'
+			</if>
+			<if test="message != ''">
+				or message like '%'||#{message}||'%'
+			</if>
+		</trim>
+	</select>
+	
+	<select id="selectBySeq" resultType="com.kedu.dto.MessagesDTO">
+		select * from messages where seq = #{seq}
+	</select>
+	
+	<select id="selectCount" resultType="int">
+		select count(*) from messages
+	</select>
+	
+	<!-- 이건 조인 예시입니다. -->
+	<!-- 지속적으로 쓸 쿼리문장이면 DTO로 리절트타입먹이고 일회성이라면 해쉬맵사용 -->
+	<select id="selecWithJoin" resultType="java.util.HashMap">
+		select * from emplyoee e join department d on e.dept_code = d.dept_code 
+	</select>	
+</mapper>

@@ -102,6 +102,7 @@
             </c:when>
             <c:otherwise>
                 <form action="/membership/home" method="post">
+                    <img src="/img/a.png" style="width: 100px; height: 100px; margin-left: 200px;">
                     <h4>"주인님:영서,혜빈"</h4>
                     <input type="text" placeholder="아이디를 입력해주세요" name="id">
                     <input type="password" placeholder="비밀번호를 입력해주세요" name="pw">

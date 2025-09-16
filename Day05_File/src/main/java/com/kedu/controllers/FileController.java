@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.kedu.dao.FilesDAO;
 import com.kedu.dto.FilesDTO;
+import com.kedu.services.FilesService;
 
 @Controller
 @RequestMapping("/file")
@@ -26,7 +26,7 @@ public class FileController {
 
 
 	@Autowired
-	private FilesDAO dao;
+	private FilesService fServ;
 
 	@RequestMapping("/upload")
 	public String upload(String text, MultipartFile[] files, HttpSession session) throws Exception { //알아서해준데 쓰래
@@ -41,7 +41,7 @@ public class FileController {
 				String sysName = UUID.randomUUID() + "_" + oriName;
 
 				file.transferTo(new File(realPath+"/"+sysName));
-				dao.insertFile(new FilesDTO(0,"test", oriName, sysName,0));
+				fServ.insertFile(new FilesDTO(0,"test", oriName, sysName,0));
 			}
 		}
 		return "redirect:/";
@@ -50,7 +50,7 @@ public class FileController {
 	@ResponseBody
 	@RequestMapping("/list")
 	public List<FilesDTO> list() {
-		return dao.selectAll();
+		return fServ.selectAll();
 	}
 
 	@RequestMapping("/download")
@@ -71,7 +71,7 @@ public class FileController {
 
 
 	@ExceptionHandler(Exception.class)
-	public String exceptionHandler(Exception e) { // 에러처리
+	public String exceptionHandler(Exception e) { // 예외처리
 		e.printStackTrace();
 		return "redirect:/error";
 	}

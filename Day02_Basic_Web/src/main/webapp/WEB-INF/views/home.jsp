@@ -11,7 +11,13 @@
 <body>
 	<table border="1" align="center">
 		<tr>
-			<th colspan="2">Index</th>
+			<th colspan="3">
+				<img src="/img/a.png" style="width: 200px; height: 200px;">
+			</th>
+		</tr>
+	
+		<tr>
+			<th colspan="2" >Index</th>
 		</tr>
 		<tr>
 			<td>
@@ -24,6 +30,28 @@
 		<tr>
 			<td colspan="2" align="center">
 				<button id= "ajax">해봐</button>
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="3" align="center">
+			<form action="/massages/searchby" >
+				<select name="column">
+					<option value="sender">작성자</option>
+					<option value="message">메세지</option>
+				</select>
+				<input type="text" placeholder="검색할 내용" name="keyword">
+				<button>검색</button>
+			</form>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3" align="center">
+			<form action="/massages/searchByMultiple" >
+				<input type="text" placeholder="input sender to search" name="sender"><br>
+				<input type="text" placeholder="input message to search" name="message"><br>
+				<button>검색</button>
+			</form>
 			</td>
 		</tr>
 	</table>

@@ -3,15 +3,15 @@ package com.kedu.dto;
 public class ContactDTO {
 	private int seq;
 	private String name;
-	private String phone;
+	private String contact;
 	
 	public ContactDTO() {}
 
-	public ContactDTO(int seq, String name, String phone) {
+	public ContactDTO(int seq, String name, String contact) {
 		super();
 		this.seq = seq;
 		this.name = name;
-		this.phone = phone;
+		this.contact = contact;
 	}
 
 	public int getSeq() {
@@ -30,12 +30,12 @@ public class ContactDTO {
 		this.name = name;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getContact() {
+		return contact;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setContact(String phone) {
+		this.contact = phone;
 	}
 
 	
