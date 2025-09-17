@@ -1,9 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-   <title>íšŒì› ê°€ì…</title>
+<meta charset="EUC-KR">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
@@ -12,229 +13,149 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-    }
-    .container {
-      width: 400px;
-      margin: 50px auto;
-      padding: 30px;
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-      color: #007bff;
-      margin-bottom: 20px;
-    }
-    input[type="text"], input[type="password"], input[type="email"] {
-      width: calc(100% - 12px);
-      padding: 8px;
-      margin: 5px 0 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .button-group {
-      text-align: center;
-      margin-top: 20px;
-    }
-    button {
-      padding: 8px 15px;
-      margin: 5px;
-      border: none;
-      border-radius: 4px;
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
-    }
-    .small-btn {
-      padding: 6px 10px;
-      font-size: 0.9em;
-      margin-left: 5px;
-    }
-    
-    
-  </style>
+<title>Signup</title>
+<style>
+.container {
+	max-width: 500px;
+	margin: 50px auto;
+	padding: 30px;
+	border: 3px solid Darkgreen;
+	border-radius: 15px;
+	background: white;
+}
+
+h4 {
+	text-align: center;
+	font-weight: bold;
+	color: DarkOrange;
+	font-size: 32px;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"]
+	{
+	width: 100%;
+	margin: 10px 0;
+	font-size: 18px;
+	border-radius: 5px;
+	border: none;
+	border-bottom: 1px solid green;
+	outline: none;
+	padding: 5px;
+}
+
+.row {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	margin: 10px 0;
+}
+
+.row input {
+	flex: 1;
+}
+
+#postcodeBtn{
+	padding: 8px 15px;
+	font-size: 14px;
+	background-color: Darkgreen;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: 0.3s;
+
+}
+
+button {
+	padding: 8px 15px;
+	font-size: 14px;
+	background-color: Darkgreen;
+	color: white;
+	border: none;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+button:hover {
+	background-color: orange;
+	transform: scale(1.05);
+	box-shadow: 0 0 8px 3px rgba(255, 165, 0, 0.6);
+}
+
+.click {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	margin-top: 20px;
+}
+
+.click button {
+	width: 150px;
+	font-size: 16px;
+}
+</style>
 </head>
 <body>
 <div class="container">
-    <h2>íšŒì› ê°€ì… ì •ë³´ ì…ë ¥</h2>
-    <form action="/members/signpu" method="post">
-      <label for="id">ID</label><br>
-      <input type="text" id="id" name="userId" placeholder="ì•„ì´ë””ë¥¼ ì…ë ¥í•˜ì„¸ìš”">
-      <button type="button" id="idcheck" class="small-btn">ì¤‘ë³µí™•ì¸</button><br>
+    <form id="registerForm" action="/members/signup" method="post" accept-charset="UTF-8">
+        <h4>È¸¿ø °¡ÀÔ Á¤º¸ ÀÔ·Â</h4>
 
-      <label for="pw">PW</label><br>
-      <input type="password" id="pw" name="userPw" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”"><br>
+        <div class="row">
+            <input type="text" placeholder="¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" name="userId">
+            <button type="button" id="idcheck">Áßº¹È®ÀÎ</button>
+        </div>
+        <span id="idcheckMsg" style="display:block; margin-left:10px; color:green; font-weight:bold;"></span>
 
-      <label for="pw_check">PW í™•ì¸</label><br>
-      <input type="password" id="pw_check" name="pw_check" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”"><br>
+        <input type="password" placeholder="ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" name="userPw">
+        <input type="password" placeholder="ºñ¹Ğ¹øÈ£¸¦ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä" name="pw_check">
+        <input type="text" placeholder="ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä" name="userName">
+        <input type="tel" placeholder="ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä (¿¹: 01012345678)" name="userPhone">
+        <input type="email" placeholder="ÀÌ¸ŞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" name="userEmail">
 
-      <label for="name">ì´ë¦„</label><br>
-      <input type="text" id="name" name="userName" placeholder="ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”"><br>
-
-      <label for="phone">ì „í™”ë²ˆí˜¸</label><br>
-      <input type="text" id="phone" name="userPhone" placeholder="ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš” (ì˜ˆ: 010-1234-5678)"><br>
-
-      <label for="email">ì´ë©”ì¼</label><br>
-      <input type="email" id="email" name="userEmail" placeholder="ì´ë©”ì¼ì„ ì…ë ¥í•˜ì„¸ìš”"><br>
-
-       <div class="row input">
-            <div class="col col-2 form-label">ìš°í¸ë²ˆí˜¸</div>
+        <div class="row input">
             <div class="col col-8">
-                <input type="text" class="form-control readonly-disabled" name="userZip" placeholder="ìš°í¸ë²ˆí˜¸" readonly>
+                <input type="text" class="form-control readonly-disabled" name="userZip" placeholder="¿ìÆí¹øÈ£" readonly>
             </div>
             <div class="col col-2">
-                <input type="button" class="btn btn-primary" onclick="searchPostcode()" value="ì°¾ê¸°">
+                <input type="button" id="postcodeBtn" class="btn btn-primary" onclick="searchPostcode()" value="Ã£±â">
             </div>
         </div>
         <div class="row input">
-            <div class="col col-2 form-label">ì£¼ì†Œ</div>
             <div class="col col-10">
-                <input type="text" class="form-control readonly-disabled" name="userAddress1" placeholder="ì£¼ì†Œ" readonly>
+                <input type="text" class="form-control readonly-disabled" name="userAddress1" placeholder="ÁÖ¼Ò" readonly>
             </div>
         </div>
         <div class="row input">
-            <div class="col col-2 form-label">ìƒì„¸ì£¼ì†Œ</div>
             <div class="col col-10">
-                <input type="text" class="form-control" name="userAddress2" placeholder="ìƒì„¸ì£¼ì†Œë¥¼ ì…ë ¥í•˜ì„¸ìš”.">
+                <input type="text" class="form-control" name="userAddress2" placeholder="»ó¼¼ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼¼¿ä.">
             </div>
         </div>
-      <div class="button-group">
-        <button type="submit">íšŒì›ê°€ì…</button>
-        <button type="reset">ë‹¤ì‹œì…ë ¥</button>
-      </div>
+
+        <div class="click">
+            <button type="submit">È¸¿ø°¡ÀÔ</button>
+            <button type="reset" id="back">µÚ·Î°¡±â</button>
+        </div>
     </form>
-  </div>
+</div>
 <script>
-    function searchPostcode() {
-        new daum.Postcode({
-            oncomplete: function (data) {
-                $("[name = 'userZip']").val(data.zonecode);
-                $("[name = 'userAddress1']").val(data.address);
-            }
-        }).open()
-    }
-
-    function beforeSubmit() {
-        $("[name = userAddress1]").removeAttr("disabled");
-        $("[name = userZip]").removeAttr("disabled");
-    }
-
-    let idRegex = /^[a-z\d_]{4,12}$/;
-    let passwordRegex = /([^\w\s])|([a-zA-Z])|(\d)/g;
-    let nameRegex = /^[ê°€-í£]{2,6}$/;
-    let phoneRegex = /^010(-?\d{4}){2}$/;
-    let emailRegex = /^.+@.+(\.com|\.co\.kr)$/;
-
-    $("[name = userId]").on("keypress", function () {
-        $("#checkIdDupl").css("display", "flex");
-        setIdDupl(false);
-    });
-
-    $("[name = pwCheck]").on("keyup", function () {
-        checkPassword();
-    });
-
-    $("[name = userPw]").on("keyup", function () {
-        checkPassword();
-    });
-
-    $("[name = pwCheck], [name = userPw]").on("focus", function () {
-        document.addEventListener('keydown', handleSpacebar);
-    });
-
-    $("[name = pwCheck], [name = userPw]").on("blur", function () {
-        document.removeEventListener('keydown', handleSpacebar);
-    });
-
-    function handleSpacebar(event) {
-        if (event.key === ' ' || event.keyCode === 32) {
-            event.preventDefault();
+function searchPostcode() {
+    new daum.Postcode({
+        oncomplete: function (data) {
+            $("[name = 'userZip']").val(data.zonecode);
+            $("[name = 'userAddress1']").val(data.address);
         }
-    }
+    }).open()
+}
 
-    function checkPassword() {
-        let passwordVal = $("[name = userPw]").val();
-        let passwordCheckVal = $("[name = pwCheck]").val();
+function beforeSubmit() {
+    $("[name = userAddress1]").removeAttr("disabled");
+    $("[name = userZip]").removeAttr("disabled");
+}
 
-        if (passwordVal) {
-            let temp;
-            let tempFlag = [undefined, undefined, undefined];
-
-            while ((temp = passwordRegex.exec(passwordVal)) != null) {
-                for (let i = 1; i < temp.length; i++) {
-                    if (!tempFlag[i]) {
-                        tempFlag[i] = temp[i];
-                    }
-                }
-            }
-
-            if (tempFlag[1] && tempFlag[2] && tempFlag[3]) {
-                $("#passwordRule").css("display", "none");
-            } else {
-                $("#passwordRule").css("display", "block");
-                $("#passwordDuplicate").css("display", "none");
-                return false;
-            }
-        }
-
-        if (passwordVal && passwordCheckVal) {
-            if (passwordVal != passwordCheckVal) {
-                $("#passwordRule").css("display", "none");
-                $("#passwordDuplicate").css("display", "block");
-                return false;
-            } else {
-                $("#passwordDuplicate").css("display", "none");
-            }
-        }
-
-        if (!passwordVal && !passwordCheckVal) {
-            $("#passwordRule").css("display", "none");
-            $("#passwordDuplicate").css("display", "none");
-            return false;
-        }
-        return true;
-    }
-
-    let checkIdDupl = false;
-
-    function setIdDupl(val) {
-        checkIdDupl = val;
-    }
-    
-   $("#registerFrm").on("submit", function checkValidation() {
-        if (idRegex.test($("[name = userId]").val()) &&
-            checkPassword() &&
-            /* checkIdDupl && */
-            nameRegex.test($("[name = userName]").val()) &&
-            emailRegex.test($("[name = userEmail]").val()) &&
-            phoneRegex.test($("[name = userPhone]").val())) {
-            return true;
-        } else {
-            alert("ì…ë ¥ ì •ë³´ë¥¼ ë‹¤ì‹œ í™•ì¸í•´ì£¼ì„¸ìš”.");
-            return false;
-        }
-    }); 
-   
-   $("#idcheck").on("click",()=>{ //idì¤‘ë³µì²´í¬
-	   $.ajax({
-		   type: "POST",
-		   url:"/members/idcheck",
-		   data:{id : $("#id").val()}
-	   }).done((resp)=>{
-		   if(resp > 0){
-			   alert("ì¤‘ë³µëœ ID");
-		   }else{
-			   alert("ì‚¬ìš© ê°€ëŠ¥ ID");
-		   }
-		   
-	   })
-   });
+$("#back").on("click", ()=>{
+	window.location.href = "/page/home";
+});
 </script>
 </body>
 </html>

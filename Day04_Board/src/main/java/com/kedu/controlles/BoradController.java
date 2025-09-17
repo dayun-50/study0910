@@ -11,35 +11,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kedu.dao.BoradDAO;
 import com.kedu.dto.BoradDTO;
+import com.kedu.services.BoradService;
 
 @Controller
 @RequestMapping("/borad")
 public class BoradController {
 	@Autowired
-	private BoradDAO dao;
+	private BoradService bServ;
+	
 	
 	@RequestMapping(value = "/boradList")
-	public String boradPage(Model m) throws Exception { //게시판목록
-		List<BoradDAO> list = dao.boradList();
+	public String boradPage(Model m, HttpSession session) throws Exception { //게시판목록
+		List<BoradDAO> list = bServ.boradList();
+		String userName = (String)session.getAttribute("userName");
+		m.addAttribute("userName", userName);
 		m.addAttribute("list", list);
 		return "borard/list";
 	}
 
-	@RequestMapping(value = "/write")
-	public String post() throws Exception{ //글작성페이지이동
-		return "/borard/post";
-	}
 	
 	@RequestMapping(value = "/postInsert")
 	public String postInster(BoradDTO dto, HttpSession session, Model m) throws Exception{ //글작성
 		String userName = (String) session.getAttribute("userName");
-		dao.insterBoard(dto);
+		bServ.insterBoard(dto);
 		m.addAttribute("userName", userName);
-		return "redirect:/boradList";
+		return "redirect:/borad/boradList";
 	}
 	
-	@RequestMapping(value = "/view")
-	public String vies(String seq) throws Exception{
-		return "";
+	@RequestMapping(value = "/view") //출력
+	public String vies(String seq, Model m, HttpSession session) throws Exception{
+		List<BoradDAO> list = bServ.selectView(seq);
+		String userName = (String)session.getAttribute("userName");
+		m.addAttribute("userName", userName);
+		m.addAttribute("list", list);
+		return "borard/view";
 	}
 }

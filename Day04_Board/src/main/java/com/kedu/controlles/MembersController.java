@@ -1,7 +1,5 @@
 package com.kedu.controlles;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,93 +7,40 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kedu.dao.MembersDAO;
 import com.kedu.dto.MembersDTO;
+import com.kedu.services.MembersService;
 
 @Controller
 @RequestMapping("/members")
 public class MembersController {
 	@Autowired
-	private MembersDAO dao;
-
-	@RequestMapping(value = "/signPage")
-	public String signupPage() throws Exception{ //화원가입 페이지이동
-		return "members/signup";
-	}
-
-	@RequestMapping(value = "/signpu")
-	public String signup(MembersDTO dto, Model m) throws Exception{ // 회원가입
-		dto.setUserPw(dao.encrypt(dto.getUserPw()));
-		dao.memberInsert(dto);
+	private MembersService mServ;
+	
+	@RequestMapping("/signup") //회원가입
+	public String signup(MembersDTO dto) { 
+		mServ.signup(dto);
 		return "redirect:/";
 	}
-
-	@ResponseBody
-	@RequestMapping(value = "/idcheck")
-	public int idcheck(String id) throws Exception { // id중복검사
-		return dao.idCheck(id);
-	}
-
-	@RequestMapping(value = "/login")
-	public String login(String id, String pw, HttpSession session, Model m)  throws Exception { // 로그인
-		int result = dao.login(id, dao.encrypt(pw));
-		if(result >0) {
-			String userName = dao.userNameSearch(id);
-			m.addAttribute("userName", userName);
+	
+	@RequestMapping("/login") //로그인
+	public String login(String userId, String userPw, 
+			Model m,HttpSession session) { 
+		String userName = mServ.login(userId, userPw);
+		if(userName != null) { //있는 ID, PW경우
 			session.setAttribute("userName", userName);
-			session.setAttribute("userId", id);
+			session.setAttribute("userId",userId);
+			m.addAttribute("userName", userName);
 			return "members/loginComplete";
-		}else {
-			return "redirect:/error";
+		}else { //로그인 실패시
+			return "redirect:/";
 		}
 	}
 	
-	@RequestMapping(value = "/main")
-	public String mainPage(HttpSession session, Model m) throws Exception {
-		String userId = (String) session.getAttribute("userId");
-		String userName = dao.userNameSearch(userId);
-		m.addAttribute("userName", userName);
-		return "members/loginComplete";
-	}
-	
-	@RequestMapping(value = "/logout")
-	public String logout(HttpSession session) throws Exception { // 로그아웃
-		session.removeAttribute("userId");
-		session.removeAttribute("userName");
-		return "redirect:/";
-	}
-	
-	@RequestMapping(value = "/delete")
-	public String secession(HttpSession session) throws Exception{ // 회원탍퇴
-		 String userId = (String) session.getAttribute("userId");
-		 dao.userSecession(userId);
-		 session.removeAttribute("userId");
-		 session.removeAttribute("userName");
-		 return "redirect:/";
-	}
-	
-	@RequestMapping(value = "/mypage")
-	public String mypage(HttpSession session, Model m) throws Exception{ // 마이페이지
-		String userId = (String) session.getAttribute("userId");
-		List<MembersDTO> list = dao.selectAll(userId);
-		m.addAttribute("list", list);
-		return "members/myPage";
-	}
-	
-	@RequestMapping(value = "/update")
-	public String userUpdate(HttpSession session, MembersDTO dto) throws Exception { // 마이페이지 수정
-		String userId = (String) session.getAttribute("userId");
-		System.out.println(dto);
-		dao.update(dto, userId);
-		return "redirect:/members/mypage";
-	}
-
-	@ExceptionHandler(Exception.class)
-	public String exceptionHandler(Exception e) { // 에러처리
+	@ExceptionHandler(Exception.class) //예외처리
+	public String exceptionHandler(Exception e) {
 		e.printStackTrace();
+
 		return "redirect:/error";
 	}
-
 }

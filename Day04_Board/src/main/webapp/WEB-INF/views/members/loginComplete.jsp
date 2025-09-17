@@ -1,60 +1,114 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <style>
-    	body h1{
-    		display: flex;
-            justify-content: center;
-    	}
-    	
-    	body table{
-    		display: flex;
-            justify-content: center;
-    	}
-    </style>
+<meta charset="EUC-KR">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<title>Login Complete</title>
+<style>
+.container {
+	max-width: 500px;
+	margin: 100px auto;
+	padding: 30px;
+	border: 3px solid Darkgreen;
+	border-radius: 15px;
+	background: white;
+}
+
+.welcome {
+	text-align: center;
+	font-weight: bold;
+	color: DarkOrange;
+	font-size: 32px;
+}
+
+input[type="text"], input[type="password"] {
+	width: 100%;
+	margin: 15px 0;
+	font-size: 20px;
+	border-radius: 5px;
+	border: none;
+	border-bottom: 1px solid green;
+	outline: none;
+}
+
+button {
+	width: 30%;
+	padding: 10px;
+	font-size: 16px;
+	background-color: Darkgreen;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+button:hover {
+	background-color: orange;
+	transform: scale(1.1);
+	box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.7);
+}
+
+.click {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 15px;
+}
+
+.click button {
+	width: 120px;
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	margin-top: 15px;
+}
+
+div.row a {
+	font-size: 12px;
+	border: none;
+	text-decoration: none;
+}
+
+.error {
+	color: red;
+	text-align: center;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+.container .click form {
+	display: flex;
+	justify-content: center;
+	gap: 10px; /* ¹öÆ° »çÀÌ °£°İ */
+	width: 100%;
+}
+</style>
 </head>
 <body>
-	<h1>${userName } ë‹˜ ë¡œê·¸ì¸ ì„±ê³µ</h1>
-	<table>
-		<tr>
-			<td><button id="borad">ê²Œì‹œíŒ</button></td>
-			<td><button id="mypage">ë§ˆì´í˜ì´ì§€</button></td>
-			<td><button id="logout">ë¡œê·¸ì•„ì›ƒ</button></td>
-			<td><button id="secession">íšŒì›íƒˆí‡´</button></td>
-		</tr>
-	</table>
+	<div class="container">
+		<div class="welcome">${userName} ´Ô¾È³çÇÏ¼¼¿ä!</div>
+		<div class="click">
+			<button type="button">¸¶ÀÌÆäÀÌÁö</button>
+			<button type="button" id="borad">°Ô½ÃÆÇ</button>
+			<button type="button">·Î±×¾Æ¿ô</button>
+			<button type="button">È¸¿øÅ»Åğ</button>
+		</div>
+	</div>
 	
-	<script>
-	$("#logout").on("click", ()=>{ //ë¡œê·¸ì•„ì›ƒ
-		window.location.href = "/members/logout";
-	});
-	
-	$("#secession").on("click", ()=>{ //íƒˆí‡´
-		let result = confirm("ì •ë§ë¡œ íšŒì› íƒˆí‡´í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
-  	   
-  	   if(result){
-  		   window.location.href = "/members/delete";
-  		   alert("íƒˆí‡´ ì™„ë£Œë˜ì…¨ìŠµë‹ˆë‹¤."); 
-  	   }
-	});
-	
-	$("#mypage").on("click", ()=>{ //ë§ˆì´í˜ì´ì§€
-		window.location.href = "/members/mypage";
-	});
-	
-	$("#borad").on("click", ()=>{ //ê²Œì‹œíŒì´ë™
+<script>
+	$("#borad").on("click", ()=>{
 		window.location.href = "/borad/boradList";
 	});
-	
-	</script>
-	
+
+</script>
 </body>
 </html>

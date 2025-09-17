@@ -1,4 +1,6 @@
 INDEX VERSION 1.131
+C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2421736092.index
+\Day06_WebSocket\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3458087151.index
 \Day03_contacts\src\main\java
 C:\STS3_workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1375734612.index

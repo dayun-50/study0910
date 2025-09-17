@@ -86,7 +86,7 @@
     <h2>게시판 목록</h2>
 
  
-        <a class="btn-write" href="/borad/write">글쓰기</a>
+        <a class="btn-write" href="/page/write">글쓰기</a>
 
 
     <table>
@@ -95,17 +95,17 @@
             <th>제목</th>
             <th>작성자</th>
             <th>등록일</th>
-            <th>관리</th>
+            <th></th>
         </tr>
         <c:forEach var="b" items="${list}">
             <tr>
                 <td>${b.seq}</td>
-                <td><a href="/borad/view/${b.seq}">${b.title}</a></td>
+                <td><a href="/borad/view?seq=${b.seq}">${b.title}</a></td>
                 <td>${b.writer}</td>
                 <td>${b.regdate}</td>
                 <td>
                     <!-- 작성자 본인만 수정/삭제 버튼 표시 -->
-                    <c:if test="${not empty user and user.id == b.writer}">
+                    <c:if test="${userName == b.writer}">
                         <a class="btn-edit" href="/board/edit/${b.seq}">수정</a>
                         <a class="btn-delete" href="/board/delete/${b.seq}">삭제</a>
                     </c:if>

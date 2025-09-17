@@ -15,11 +15,16 @@
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="initialSize" value="5"/>
 	</bean>	
-	
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations" value="classpath:/mappers/*-mapper.xml"/>
 	</bean>
 	
-	<context:component-scan base-package="com.kedu.dao" />
+	<bean id="SqlSessionTemplate" class = "org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSession"/>
+	</bean>
 	
+	<context:component-scan base-package="com.kedu.services"/>
+	<context:component-scan base-package="com.kedu.dao" />
 </beans>

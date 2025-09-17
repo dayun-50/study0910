@@ -11,7 +11,6 @@ public class MembersDTO {
 	private String userAddress1;
 	private String userAddress2;
 	
-	
 	public MembersDTO() {}
 	public MembersDTO(int seq, String userId, String userPw, String userName, String userPhone, String userEmail,
 			String userZip, String userAddress1, String userAddress2) {
@@ -80,9 +79,6 @@ public class MembersDTO {
 	public void setUserAddress2(String userAddress2) {
 		this.userAddress2 = userAddress2;
 	}
-	
-	
-	
 	
 	
 }

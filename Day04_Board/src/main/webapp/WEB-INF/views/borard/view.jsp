@@ -67,18 +67,17 @@
 <body>
 <div class="container">
     <h2>게시글 상세보기</h2>
-    <div class="info"><label>제목:</label> ${board.title}</div>
-    <div class="info"><label>작성자:</label> ${board.writer}</div>
-    <div class="info"><label>등록일:</label> ${board.regDate}</div>
-    <div class="content">${board.content}</div>
+    <div class="info"><label>제목:</label> ${list[0].title}</div>
+    <div class="info"><label>작성자:</label> ${list[0].writer}</div>
+    <div class="info"><label>등록일:</label> ${list[0].regdate}</div>
 
     <div class="buttons">
         <!-- 작성자 본인만 수정/삭제 버튼 표시 -->
-        <c:if test="${not empty user and user.id == board.writer}">
-            <a class="btn-edit" href="/board/edit/${board.seq}">수정</a>
-            <a class="btn-delete" href="/board/delete/${board.seq}">삭제</a>
+        <c:if test="${userName == list[0].writer}">
+            <a class="btn-edit" href="/board/edit/${list[0].seq}">수정</a>
+            <a class="btn-delete" href="/board/delete/${list[0].seq}">삭제</a>
         </c:if>
-        <a class="btn-list" href="/board/list">목록</a>
+        <a class="btn-list" href="/borad/postInsert">목록</a>
     </div>
 </div>
 </body>
