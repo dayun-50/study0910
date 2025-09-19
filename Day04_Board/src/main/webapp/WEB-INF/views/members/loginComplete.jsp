@@ -39,7 +39,7 @@ input[type="text"], input[type="password"] {
 button {
 	width: 30%;
 	padding: 10px;
-	font-size: 16px;
+	font-size: 10px;
 	background-color: Darkgreen;
 	color: white;
 	border: none;
@@ -97,6 +97,7 @@ div.row a {
 	<div class="container">
 		<div class="welcome">${userName} 님안녕하세요!</div>
 		<div class="click">
+			<button type="button" id="chat">채팅참여</button>
 			<button type="button">마이페이지</button>
 			<button type="button" id="borad">게시판</button>
 			<button type="button">로그아웃</button>
@@ -107,6 +108,10 @@ div.row a {
 <script>
 	$("#borad").on("click", ()=>{
 		window.location.href = "/borad/boradList";
+	});
+	
+	$("#chat").on("click", ()=>{
+		window.location.href = "/page/chatPage";
 	});
 
 </script>

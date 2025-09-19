@@ -23,6 +23,11 @@ public class PageController {
 		return "/borard/post";
 	}
 	
+	@RequestMapping("/chatPage")
+	public String chatPage() { // 채팅 페이지 이동
+		return "chat/chat";
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public String exceptionHandler(Exception e) {
 		e.printStackTrace();

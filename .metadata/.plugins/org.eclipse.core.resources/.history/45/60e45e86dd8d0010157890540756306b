@@ -1,5 +1,0 @@
-package com.kedu.beans;
-
-public interface Tv {
-
-}

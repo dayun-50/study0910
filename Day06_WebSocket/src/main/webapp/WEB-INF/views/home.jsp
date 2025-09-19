@@ -122,10 +122,24 @@
    <script>
    		let ws = new WebSocket("ws://10.5.5.9/chat"); //엔드포인트 패키지에 클레스 안에있는 URL이랑 맞춰야함
    
+   		function dislayChat(chat){
+   			let line = $("<div>").addClass("co")
+				line.html(chat);
+				$(".registration").append(line);
+   		}
+   		
    		ws.onmessage = (e)=>{
-   			let line = $("<div>").addClass("co").html(e.data);
    			
-   			$(".registration").append(line);
+   			let data = JSON.parse(e.data);
+   			
+   			if(data.type == "chat"){
+   				dislayChat(data.data);
+   			}else if(data.type=="history"){
+   				for(let i of data.data){
+   				dislayChat(i);
+   				}
+   			}
+   			
    		}
    
       $("#text1").on(
